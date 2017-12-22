@@ -1,0 +1,8 @@
+{
+  "name": "craft_beer_shops",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}
