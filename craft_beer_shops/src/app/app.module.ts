@@ -9,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { ShopsListPageModule } from '../pages/shops-list/shops-list.module';
 import { CitiesPageModule } from '../pages/cities/cities.module';
+import { BeersListPageModule } from '../pages/beers-list/beers-list.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { CitiesPageModule } from '../pages/cities/cities.module';
     ShopsListPageModule,
     CitiesPageModule,
     ShopInfoPageModule,
+    BeersListPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [
