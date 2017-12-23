@@ -1,6 +1,8 @@
+import { ShopInfoPage } from './../shop-info/shop-info';
 import { NavParams } from 'ionic-angular';
 import { Component, OnInit } from '@angular/core';
 import { Shop } from '../../models/shop.model';
+import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 
 @Component({
   selector: 'page-shops-list',
@@ -11,7 +13,8 @@ export class ShopsListPage implements OnInit {
   shops: Shop[];
   city: string = "";
   
-  constructor(private navParams: NavParams) { }
+  constructor(private navParams: NavParams,
+              private modalController: ModalController) { }
 
   ngOnInit() {
     this.city = this.navParams.get('city');  
@@ -19,6 +22,8 @@ export class ShopsListPage implements OnInit {
   }
 
   onInformation(shop: Shop): void {
-    //modal information
+    let modal = this.modalController.create(ShopInfoPage, {shop: shop});
+    console.log(shop);
+    modal.present();
   } 
 }
