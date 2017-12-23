@@ -1,13 +1,16 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Cities</ion-title>
+    <ion-title>{{ city }} Shops</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <ion-list no-lines>
-    <button ion-item *ngFor="let city of cities">
-      {{ city.name }}
-    </button> 
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let shop of shops">
+      <ion-thumbnail item-start>
+        <img src="{{ shop.photo }}" alt="{{shop.name}} logo">
+      </ion-thumbnail>
+      <h2>{{ shop.name }}</h2>
+    </button>
   </ion-list>
 </ion-content>

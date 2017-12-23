@@ -1,6 +1,6 @@
+import { NavParams } from 'ionic-angular';
 import { Component, OnInit } from '@angular/core';
-import { City } from '../../models/city.model';
-import { DisplayService } from '../../services/display.service';
+import { Shop } from '../../models/shop.model';
 
 @Component({
   selector: 'page-shops-list',
@@ -8,11 +8,13 @@ import { DisplayService } from '../../services/display.service';
 })
 
 export class ShopsListPage implements OnInit {
-  cities: City[];
-
-  constructor(private displayService: DisplayService) { }
+  shops: Shop[];
+  city: string = "";
+  
+  constructor(private navParams: NavParams) { }
 
   ngOnInit() {
-    this.cities = this.displayService.getCities();
+    this.city = this.navParams.get('city');  
+    this.shops = this.navParams.get('shops');
   }
 }

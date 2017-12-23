@@ -6,7 +6,7 @@
 
 <ion-content padding>
   <ion-list no-lines>
-    <button ion-item *ngFor="let city of cities">
+    <button ion-item *ngFor="let city of cities" (click)="onClick(city)">
       {{ city.name }}
     </button> 
   </ion-list>
