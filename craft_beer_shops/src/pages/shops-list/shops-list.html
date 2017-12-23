@@ -6,7 +6,7 @@
 
 <ion-content>
   <ion-list>
-    <button ion-item *ngFor="let shop of shops">
+    <button ion-item *ngFor="let shop of shops" (click)="onShopClick(shop)">
       <ion-thumbnail item-start>
         <img src="{{ shop.photo }}" alt="{{shop.name}} logo">
       </ion-thumbnail>

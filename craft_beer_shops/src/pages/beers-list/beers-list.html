@@ -1,8 +1,17 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>BeersList</ion-title>
+    <ion-title>{{ shopName }} Beers</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let beer of beersList">
+      <ion-thumbnail item-start>
+        <img src="{{ beer.photo }}" alt="{{beer.name}} logo">
+      </ion-thumbnail>
+      <h2>{{ beer.name }}</h2>
+    </button>
+  </ion-list>
 </ion-content>
+  
