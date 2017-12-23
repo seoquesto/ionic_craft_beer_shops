@@ -1,3 +1,4 @@
+import { ShopInfoPageModule } from './../pages/shop-info/shop-info.module';
 import { DisplayService } from './../services/display.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ import { CitiesPageModule } from '../pages/cities/cities.module';
     BrowserModule,
     ShopsListPageModule,
     CitiesPageModule,
+    ShopInfoPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [
