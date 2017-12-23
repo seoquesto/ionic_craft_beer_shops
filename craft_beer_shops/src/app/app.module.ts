@@ -1,4 +1,4 @@
-import { CityService } from './../services/city.service';
+import { DisplayService } from './../services/display.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
@@ -7,7 +7,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
 import { ShopsListPageModule } from '../pages/shops-list/shops-list.module';
-import { ShopListService } from '../services/shop-list.service';
+import { CitiesPageModule } from '../pages/cities/cities.module';
 
 @NgModule({
   declarations: [
@@ -16,17 +16,21 @@ import { ShopListService } from '../services/shop-list.service';
   imports: [
     BrowserModule,
     ShopsListPageModule,
+    CitiesPageModule,
     IonicModule.forRoot(MyApp)
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [
+    IonicApp
+  ],
   providers: [
     StatusBar,
     SplashScreen,
-    ShopListService,
+    DisplayService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
-  entryComponents :[
+  entryComponents: [
     MyApp
   ]
 })
-export class AppModule {}
+
+export class AppModule { }
