@@ -17,4 +17,8 @@ export class ShopsListPage implements OnInit {
     this.city = this.navParams.get('city');  
     this.shops = this.navParams.get('shops');
   }
+
+  onInformation(shop: Shop): void {
+    //modal information
+  } 
 }
