@@ -1,8 +1,34 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>BeerInfo</ion-title>
-  </ion-navbar>
-</ion-header>
-
-<ion-content padding>
-</ion-content>
+    <ion-navbar>
+      <ion-buttons start>
+        <button ion-button (click)="onClose()">Close</button>
+      </ion-buttons>
+      <ion-title>Informations</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <ion-list>
+      <ion-item>
+        <ion-thumbnail item-start>
+          <img src="{{ beer.photo }}" alt="{{beer.name}} logo">
+        </ion-thumbnail>
+        <ion-item>Name: 
+          <ion-note item-end>{{ beer.name }}</ion-note>
+          </ion-item>
+        </ion-item>
+        <ion-item>Price: 
+          <ion-note item-end>{{ beer.price }}</ion-note>
+        </ion-item>
+        <ion-item>Percentages: 
+          <ion-note item-end>{{ beer.percentages }}%</ion-note>
+        </ion-item>
+        <ion-item>IBU: 
+          <ion-note item-end>{{ beer.ibu }}</ion-note>
+        </ion-item>
+        <ion-item>Plato: 
+          <ion-note item-end>{{ beer.plato }}&#xB0;</ion-note>
+        </ion-item>
+    </ion-list>
+   <button ion-button color="danger" full (click)="onClose()">Close</button>
+  </ion-content>

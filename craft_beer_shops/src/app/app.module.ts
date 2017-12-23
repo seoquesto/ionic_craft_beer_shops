@@ -10,7 +10,7 @@ import { MyApp } from './app.component';
 import { ShopsListPageModule } from '../pages/shops-list/shops-list.module';
 import { CitiesPageModule } from '../pages/cities/cities.module';
 import { BeersListPageModule } from '../pages/beers-list/beers-list.module';
-import { BeerInfoPage } from '../pages/beer-info/beer-info';
+import { BeerInfoPageModule } from '../pages/beer-info/beer-info.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { BeerInfoPage } from '../pages/beer-info/beer-info';
     CitiesPageModule,
     ShopInfoPageModule,
     BeersListPageModule,
-    BeerInfoPage,
+    BeerInfoPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [
