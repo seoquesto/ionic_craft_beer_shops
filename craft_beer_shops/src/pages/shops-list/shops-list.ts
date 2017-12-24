@@ -11,6 +11,7 @@ import { ModalController } from 'ionic-angular/components/modal/modal-controller
 })
 
 export class ShopsListPage implements OnInit {
+  filteredShops: Shop[];
   shops: Shop[];
   city: string = "";
   
@@ -21,6 +22,7 @@ export class ShopsListPage implements OnInit {
   ngOnInit() {
     this.city = this.navParams.get('city');  
     this.shops = this.navParams.get('shops');
+    this.filteredShops = this.shops;
   }
 
   onInformation(shop: Shop): void {
@@ -32,5 +34,17 @@ export class ShopsListPage implements OnInit {
   onShopClick(shop: Shop): void {
     this.navController.push(BeersListPage, {
       shopName: shop.name, beers: shop.beers});
+  }
+
+  refreshShops(ev: any) {
+    let val: string = ev.target.value;
+    if(val!=null && val.trim()!='') {
+      const valCompare = val.trim().toLowerCase();
+      this.filteredShops = this.shops.filter(shop => {
+        return (shop.name.toLowerCase().startsWith(valCompare));
+      });
+    }else {
+      this.filteredShops = this.shops;
+    }
   }
 }
