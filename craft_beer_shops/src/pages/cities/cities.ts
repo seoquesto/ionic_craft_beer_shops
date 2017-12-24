@@ -10,11 +10,18 @@ import { City } from '../../models/city.model';
 })
 
 export class CitiesPage {
-  public cities: City[];
+  cityViewModels: CityViewModel[] = [];
   
   constructor(private displayService: DisplayService,
               private navController: NavController) {
-    this.cities = displayService.getCities();  
+    const cities = displayService.getCities();  
+    this.initDisplayData(cities);
+  }
+
+  initDisplayData(cities: City[]) {
+    cities.forEach((city)=>{
+      this.cityViewModels.push({city: city, count: city.shops.length});
+    });
   }
 
   onClick(city: City): void {
@@ -23,4 +30,9 @@ export class CitiesPage {
       shops: this.displayService.getShops(city.name)
     });
   }
+}
+
+interface CityViewModel {
+  city: City;
+  count: number;
 }

@@ -6,8 +6,9 @@
 
 <ion-content padding>
   <ion-list no-lines>
-    <button ion-item *ngFor="let city of cities" (click)="onClick(city)">
-      {{ city.name }}
+    <button ion-item *ngFor="let cityViewModel of cityViewModels" full (click)="onClick(cityViewModel.city)">
+      {{ cityViewModel.city.name }}
+      <ion-badge item-end color="light"> {{ cityViewModel.count }}</ion-badge>
     </button> 
   </ion-list>
 </ion-content>
