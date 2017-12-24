@@ -13,6 +13,7 @@ import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 export class BeersListPage implements OnInit{
   shopName: string = '';
   beersList: Beer[];
+  filteredBeers: Beer[];
 
   constructor(private navParams: NavParams,
               private modalController: ModalController) { }
@@ -20,11 +21,24 @@ export class BeersListPage implements OnInit{
   ngOnInit(): void {
     this.shopName = this.navParams.get('shopName');
     this.beersList = this.navParams.get('beers');
+    this.filteredBeers = this.beersList;
   }
 
   onBeerInfoClick(beer: Beer) {
     const modal = this.modalController.create(BeerInfoPage, {
       beer: beer})
     modal.present();
+  }
+
+  refreshBeers(ev: any) {
+    let val: string = ev.target.value;
+    if(val!=null && val.trim()!='') {
+      const valCompare = val.trim().toLowerCase();
+      this.filteredBeers = this.beersList.filter(beer => {
+        return (beer.name.toLowerCase().startsWith(valCompare));
+      });
+    }else {
+      this.filteredBeers = this.beersList;
+    } 
   }
 }

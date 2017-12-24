@@ -5,8 +5,9 @@
 </ion-header>
 
 <ion-content>
+    <ion-searchbar (ionInput)="refreshBeers($event)"></ion-searchbar>
   <ion-list>
-    <button ion-item *ngFor="let beer of beersList">
+    <button ion-item *ngFor="let beer of filteredBeers">
       <ion-thumbnail item-start>
         <img src="{{ beer.photo }}" alt="{{beer.name}} logo">
       </ion-thumbnail>
