@@ -10,6 +10,7 @@ import { Beer } from '../../models/beer.model';
 
 export class BeerInfoPage implements OnInit {
   beer: Beer;
+  segment: string = 'description';
   
   constructor(private navParams: NavParams,
               private viewController: ViewController) { }

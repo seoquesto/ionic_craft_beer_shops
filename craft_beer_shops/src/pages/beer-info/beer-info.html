@@ -5,30 +5,65 @@
       </ion-buttons>
       <ion-title>Informations</ion-title>
     </ion-navbar>
+    <ion-toolbar no-border-top>
+      <ion-segment [(ngModel)]="segment">
+        <ion-segment-button value="description">
+          Description
+        </ion-segment-button>
+        <ion-segment-button value="comments">
+          Comments
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
   </ion-header>
   
-  <ion-content>
-    <ion-list>
+<ion-content>
+  <div [ngSwitch]="segment">
+    <ion-list *ngSwitchCase="'description'">
       <ion-item>
         <ion-thumbnail item-start>
-          <img src="{{ beer.photo }}" alt="{{beer.name}} logo">
+          <img src="{{ beer.photo }}" alt="{{ beer.name }} logo">
         </ion-thumbnail>
         <ion-item>Name: 
           <ion-note item-end>{{ beer.name }}</ion-note>
-          </ion-item>
         </ion-item>
-        <ion-item>Price: 
-          <ion-note item-end>{{ beer.price }}</ion-note>
-        </ion-item>
-        <ion-item>Percentages: 
-          <ion-note item-end>{{ beer.percentages }}%</ion-note>
-        </ion-item>
-        <ion-item>IBU: 
-          <ion-note item-end>{{ beer.ibu }}</ion-note>
-        </ion-item>
-        <ion-item>Plato: 
-          <ion-note item-end>{{ beer.plato }}&#xB0;</ion-note>
-        </ion-item>
+      </ion-item>
+      <ion-item>Price: 
+        <ion-note item-end>{{ beer.price }}</ion-note>
+      </ion-item>
+      <ion-item>Percentages: 
+        <ion-note item-end>{{ beer.percentages }}%</ion-note>
+      </ion-item>
+      <ion-item>IBU: 
+        <ion-note item-end>{{ beer.ibu }}</ion-note>
+      </ion-item>
+      <ion-item>Plato: 
+        <ion-note item-end>{{ beer.plato }}&#xB0;</ion-note>
+      </ion-item>
     </ion-list>
-   <button ion-button color="danger" full (click)="onClose()">Close</button>
-  </ion-content>
+    
+  <ion-list *ngSwitchCase="'comments'">
+    <ion-item *ngFor="let comment of beer.comments">
+      <ion-avatar item-start>
+        <img src="{{ comment.user.photo }}" alt="{{ comment.user.name }} comment">
+      </ion-avatar>
+      <ion-row>
+        <ion-col col-10>
+          <h2>{{ comment.user.name }}</h2>
+          <p>{{ comment.content }}</p>
+        </ion-col>
+        <ion-col col-2>
+          <h6>{{ comment.rate }}/6</h6>
+        </ion-col>
+      </ion-row>
+      <p text-right class="opacity-2 font-very-small">{{ comment.date }}</p>
+    </ion-item>
+  </ion-list>
+  </div>
+  <ion-footer no-shadow>
+    <ion-toolbar position="bottom">
+      <button ion-button color="danger" position="bottom" full (click)="onClose()">Close</button>
+    </ion-toolbar>
+  </ion-footer>
+</ion-content>
+  
