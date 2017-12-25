@@ -12,6 +12,7 @@ import { CitiesPageModule } from '../pages/cities/cities.module';
 import { BeersListPageModule } from '../pages/beers-list/beers-list.module';
 import { BeerInfoPageModule } from '../pages/beer-info/beer-info.module';
 import { CommentService } from '../services/comment.service';
+import { ManagmentPageModule } from '../pages/managment/managment.module';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CommentService } from '../services/comment.service';
     ShopInfoPageModule,
     BeersListPageModule,
     BeerInfoPageModule,
+    ManagmentPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [

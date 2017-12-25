@@ -1,1 +1,24 @@
-<ion-nav [root]="rootPage"></ion-nav>
+<ion-menu [content]="content">
+    <ion-header>
+        <ion-navbar>
+            <ion-buttons start>
+                <button ion-button menuToggle icon-only>
+                    <ion-icon name='menu'></ion-icon>
+                </button>
+            </ion-buttons>
+            <ion-title>Menu</ion-title>
+        </ion-navbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button ion-item (click)="openPage(rootPage)">
+                Home
+            </button>
+            <button ion-item (click)="openPage(managePage)">
+                Manage
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-nav id="nav" #content [root]="rootPage"></ion-nav>
