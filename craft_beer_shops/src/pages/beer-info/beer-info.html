@@ -50,7 +50,7 @@
       <ion-row>
         <ion-col col-10>
           <h2>{{ comment.user.name }}</h2>
-          <p>{{ comment.content }}</p>
+          <p text-wrap>{{ comment.content }}</p>
         </ion-col>
         <ion-col col-2>
           <h6>{{ comment.rate }}/6</h6>
@@ -60,10 +60,11 @@
     </ion-item>
   </ion-list>
   </div>
-  <ion-footer no-shadow>
-    <ion-toolbar position="bottom">
-      <button ion-button color="danger" position="bottom" full (click)="onClose()">Close</button>
-    </ion-toolbar>
-  </ion-footer>
 </ion-content>
-  
+
+<ion-footer no-shadow>
+  <ion-toolbar position="bottom">
+    <button *ngIf="segment=='comments'" ion-button color="light" position="bottom" full (click)="onAddComment()">Add comment</button>
+    <button ion-button color="danger" position="bottom" full (click)="onClose()">Close</button>
+  </ion-toolbar>
+</ion-footer>

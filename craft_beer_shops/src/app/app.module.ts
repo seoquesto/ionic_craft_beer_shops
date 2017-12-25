@@ -11,6 +11,7 @@ import { ShopsListPageModule } from '../pages/shops-list/shops-list.module';
 import { CitiesPageModule } from '../pages/cities/cities.module';
 import { BeersListPageModule } from '../pages/beers-list/beers-list.module';
 import { BeerInfoPageModule } from '../pages/beer-info/beer-info.module';
+import { CommentService } from '../services/comment.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { BeerInfoPageModule } from '../pages/beer-info/beer-info.module';
     StatusBar,
     SplashScreen,
     DisplayService,
+    CommentService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   entryComponents: [
