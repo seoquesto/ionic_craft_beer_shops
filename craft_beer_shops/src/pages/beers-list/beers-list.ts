@@ -2,8 +2,7 @@ import { ModalController } from 'ionic-angular/components/modal/modal-controller
 import { BeerInfoPage } from './../beer-info/beer-info';
 import { Beer } from './../../models/beer.model';
 import { NavParams } from 'ionic-angular';
-import { Component } from '@angular/core';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'page-beers-list',

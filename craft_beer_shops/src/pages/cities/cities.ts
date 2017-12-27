@@ -1,5 +1,5 @@
 import { ShopsListPage } from './../shops-list/shops-list';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { DisplayService } from './../../services/display.service';
 import { Component } from '@angular/core';
 import { City } from '../../models/city.model';

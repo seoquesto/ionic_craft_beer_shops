@@ -26,7 +26,7 @@ export default [
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
             ]),
-        ]),
+        ], 'Adam' ),
         new Shop("Piwa Paw", "321-421-421", "95-124", "al. Wlokniarzy", 222, "https://pbs.twimg.com/profile_images/593707526971105280/FwnpRar_.jpg", [
             new Beer("Perla", 10, "http://tysonsbiergarten.com/wp-content/uploads/2015/04/beer-icon.png", 1, 11, 17,
             [
@@ -46,7 +46,7 @@ export default [
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
             ]),
-        ]),
+        ], 'Adam1' ),
         new Shop("Z innej beczki", "321-421-421", "95-124", "al. Wlokniarzy", 222, "https://pbs.twimg.com/profile_images/593707526971105280/FwnpRar_.jpg", [
             new Beer("Perla", 10, "http://tysonsbiergarten.com/wp-content/uploads/2015/04/beer-icon.png", 1, 11, 20,
             [
@@ -66,7 +66,7 @@ export default [
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
             ]),
-        ]),
+        ], 'Adam2' ),
         new Shop("Chmielowa Dolina", "321-421-421", "95-124", "al. Wlokniarzy", 222, "https://pbs.twimg.com/profile_images/593707526971105280/FwnpRar_.jpg", [
             new Beer("Bawarka", 12, "http://tysonsbiergarten.com/wp-content/uploads/2015/04/beer-icon.png", 4, 10, 10,
             [
@@ -86,7 +86,7 @@ export default [
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
             ]),
-        ]),
+        ], 'Adam3' ),
         new Shop("Piwa Paw", "321-421-421", "95-124", "al. Wlokniarzy", 222, "https://pbs.twimg.com/profile_images/593707526971105280/FwnpRar_.jpg", [
             new Beer("Perla", 12, "http://tysonsbiergarten.com/wp-content/uploads/2015/04/beer-icon.png", 1, 11, 10,
             [
@@ -106,7 +106,7 @@ export default [
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
             ]),
-        ]),
+        ], 'Adam4' ),
         new Shop("Z innej beczki", "321-421-421", "95-124", "al. Wlokniarzy", 222, "https://pbs.twimg.com/profile_images/593707526971105280/FwnpRar_.jpg", [
             new Beer("Perla", 140, "http://tysonsbiergarten.com/wp-content/uploads/2015/04/beer-icon.png", 1, 11, 20,
             [
@@ -126,6 +126,6 @@ export default [
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
                 new BeerComment('The best beer', 5, new Date().toLocaleString(), new User('User01', 'https://image.flaticon.com/icons/png/128/149/149072.png')),
             ]),
-        ])
+        ], 'Adam5' )
     ]),
 ];

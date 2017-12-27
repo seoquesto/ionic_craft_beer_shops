@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-navbar>
+      <ion-buttons start>
+        <button ion-button (click)="onClose()">Close</button>
+      </ion-buttons>
+      <ion-title>{{ mode }} Beer</ion-title>
+    </ion-navbar>
+  </ion-header>
+  
+  <ion-content>
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+      <ion-item>
+          <ion-label floating>Name:</ion-label>
+          <ion-input type="text" name="name" ngModel minlength=1 maxlength=30 required></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Price: </ion-label>
+          <ion-input type="number" ngModel name="price" minlength=1 maxlength=5 required></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Photo TODO: </ion-label>
+          <ion-input type="text" ngModel name="photo" value="https://png.icons8.com/cotton/2x//beer.png"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>Percentages: </ion-label>
+          <ion-input type="number" ngModel name="percentages" minlength=0 maxlength=2 required></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>IBU: </ion-label>
+          <ion-input type="number" ngModel name="ibu" minlength=0 maxlength=2 required></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label floating>PLATO: </ion-label>
+          <ion-input type="number" ngModel name="plato" minlength=1 maxlength=2 required></ion-input>
+      </ion-item>
+      <button type="submit" [disabled]="!f.valid" ion-button color="light" position="bottom" full>{{ mode }} beer</button>
+      <button type="button" ion-button color="danger" position="bottom" full (click)="onClose()">Close</button>
+    </form>
+  </ion-content>

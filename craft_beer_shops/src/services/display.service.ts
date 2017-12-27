@@ -11,11 +11,31 @@ export class DisplayService {
     }
     
     getCities() {
-        return this.cities.slice();
+        return this.cities;
     }
     
     getShops(city: string): Shop[] {
-        return this.cities.find(e=>e.name==city).shops.slice();
+        return this.cities.find(e=>e.name==city).shops;
+    }
+
+    insertShop(city: string, shop: Shop) {
+        this.cities.find(e=>e.name==city).shops.unshift(shop);
+    }
+
+    updateShop(city: string, prevShopName:string, shop: Shop) {
+        let cityIndex = this.cities.findIndex(e=>e.name == city);
+        let shopIndex = this.cities[cityIndex].shops.findIndex(e=>e.name == prevShopName);
+        this.cities[cityIndex].shops[shopIndex] = shop;
+    }
+
+    getShop(userName: string): Shop | null {
+        let searchedShop: Shop;
+        this.cities.forEach(e=>e.shops.forEach(e=>{
+            if(e.ownerName===userName){
+                searchedShop = e;
+            }
+        }));
+        return searchedShop;
     }
 
     getBeer(beername: string) {
@@ -36,7 +56,6 @@ export class DisplayService {
                 g=>{
                     if(g.name == beerName){
                         g.comments.unshift(comment);
-                        console.log(g);
                         return;
                     }
                 }

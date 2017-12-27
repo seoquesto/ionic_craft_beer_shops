@@ -7,5 +7,6 @@ export class Shop {
                 public street: string, 
                 public buildingNumber: number,
                 public photo: string, 
-                public beers: Beer[]) { }
+                public beers: Beer[],
+                public ownerName: string) { }
 }

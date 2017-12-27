@@ -13,6 +13,8 @@ import { BeersListPageModule } from '../pages/beers-list/beers-list.module';
 import { BeerInfoPageModule } from '../pages/beer-info/beer-info.module';
 import { CommentService } from '../services/comment.service';
 import { ManagmentPageModule } from '../pages/managment/managment.module';
+import { AuthService } from '../services/auth.service';
+import { ManageBeerPageModule } from '../pages/manage-beer/manage-beer.module';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,14 @@ import { ManagmentPageModule } from '../pages/managment/managment.module';
     BeersListPageModule,
     BeerInfoPageModule,
     ManagmentPageModule,
+    ManageBeerPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [
     IonicApp
   ],
   providers: [
+    AuthService,
     StatusBar,
     SplashScreen,
     DisplayService,

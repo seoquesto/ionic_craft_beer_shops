@@ -1,8 +1,7 @@
 import { Shop } from './../../models/shop.model';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ViewController } from 'ionic-angular/navigation/view-controller';
 import { NavParams } from 'ionic-angular';
-import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 
 @Component({
   selector: 'page-shop-info',
