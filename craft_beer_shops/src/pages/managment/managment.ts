@@ -22,17 +22,20 @@ export class ManagmentPage {
   street: string = '';
   building: number;
   photo: string = '';
-  
+
+  cities:string[] = [];
+
   constructor(private modalController: ModalController,
               public managmentService: ManagmentService) {
   }
 
   ionViewDidEnter(): void {
+    this.cities = this.managmentService.getCities();
     this.editMode = this.managmentService.hasShop();
     const shop = this.managmentService.getShop();
     this.name = shop.name;
     this.phone = shop.phoneNumber;
-    this.city = 'Lodz';
+    this.city = this.managmentService.getCity();
     this.postal = shop.postalAddress;
     this.street = shop.street;
     this.building = shop.buildingNumber;

@@ -34,9 +34,11 @@
                     <ion-label floating>Phone number: </ion-label>
                     <ion-input type="text" [(ngModel)]="phone" name="phone" minlength=9 maxlength=14 required></ion-input>
                 </ion-item>
-                <ion-item>
-                    <ion-label floating>City: </ion-label>
-                    <ion-input type="text" [(ngModel)]="city" name="city" minlength=2 maxlength=30 required></ion-input>
+                <ion-item padding-top>
+                    <ion-label>City</ion-label>
+                    <ion-select [(ngModel)]="city" name="city">
+                      <ion-option *ngFor="let c of cities" [value]="c">{{ c }}</ion-option>
+                    </ion-select>
                 </ion-item>
                 <ion-item>
                     <ion-label floating>Postal address: </ion-label>

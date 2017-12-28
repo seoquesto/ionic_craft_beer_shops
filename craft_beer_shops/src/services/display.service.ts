@@ -13,6 +13,12 @@ export class DisplayService {
     getCities() {
         return this.cities;
     }
+
+    getCitiesString(): string[] {
+        let list:string[] = [];
+        this.cities.forEach(e=>{list.push(e.name);});
+        return list;
+    }
     
     getShops(city: string): Shop[] {
         return this.cities.find(e=>e.name==city).shops;
@@ -28,14 +34,26 @@ export class DisplayService {
         this.cities[cityIndex].shops[shopIndex] = shop;
     }
 
-    getShop(userName: string): Shop | null {
-        let searchedShop: Shop;
-        this.cities.forEach(e=>e.shops.forEach(e=>{
-            if(e.ownerName===userName){
-                searchedShop = e;
+    updateShopCity(newCity: string, oldCity: string, prevShopName:string, shop: Shop) {
+        let cityIndex = this.cities.findIndex(e=>e.name == oldCity);
+        let shopIndex = this.cities[cityIndex].shops.findIndex(e=>e.name == prevShopName);
+        this.cities[cityIndex].shops.splice(shopIndex,1);
+        
+        this.insertShop(newCity, shop);
+    }
+
+
+    getShop(userName: string): {shop: Shop, cityName: string} | null {
+        this.cities.forEach(e=>{
+            if(e.shops!=null && e.shops.length > 0){
+                e.shops.forEach(s=>{
+                    if(s.ownerName===userName){
+                        return {shop: s, cityName: e.name };
+                    }
+                });
             }
-        }));
-        return searchedShop;
+        });
+        return null;
     }
 
     getBeer(beername: string) {

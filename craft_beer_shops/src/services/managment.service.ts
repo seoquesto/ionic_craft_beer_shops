@@ -9,8 +9,10 @@ export class ManagmentService {
     private shopName: string = '';
     private ownerName: string = '';
     private manageShop: Shop;
+    private city: string = '';
     private manageBeers: Beer[] = [];
     private editMode: boolean = false;
+    private cities: string[] = [];
 
     constructor(private displayService: DisplayService,
                 private authService: AuthService) {
@@ -23,17 +25,28 @@ export class ManagmentService {
 
     initManagment() {
         this.ownerName = this.authService.getUser().name;
+        this.cities = this.displayService.getCitiesString();
 
         if(this.hasShop()){
             const temp = this.displayService.getShop(this.ownerName);
-            this.manageShop = new Shop(temp.name, temp.phoneNumber, temp.postalAddress, temp.street, temp.buildingNumber, temp.photo, [], this.ownerName);
+            this.manageShop = new Shop(temp.shop.name,
+                                temp.shop.phoneNumber,
+                                temp.shop.postalAddress,
+                                temp.shop.street,
+                                temp.shop.buildingNumber,
+                                temp.shop.photo,
+                                [],
+                                this.ownerName);
             if(this.manageShop.beers!=null) {
-                temp.beers.forEach(e=>this.manageBeers.push(e));
+                temp.shop.beers.forEach(e=>this.manageBeers.push(e));
             }
+
+            this.city = temp.cityName;
             this.editMode = true;
             this.shopName = this.manageShop.name;
         }
         else {
+            this.city = 'Lodz';
             this.editMode = false;
             this.manageBeers = [];
             this.manageShop = new Shop('','','','',null,'',this.manageBeers,this.ownerName);
@@ -55,14 +68,27 @@ export class ManagmentService {
             this.manageBeers.forEach(e=>this.manageShop.beers.push(e));
         }
 
-        if(this.editMode) {
-            this.displayService.updateShop(city, this.shopName, this.manageShop);
+        //user changes the city -.-' but ok
+        if(this.city == city) {
+            if(this.editMode) {
+                this.displayService.updateShop(city, this.shopName, this.manageShop);
+            }
+            else {
+                this.displayService.insertShop(city, this.manageShop);
+            }
         }
         else {
-            this.displayService.insertShop(city, this.manageShop);
+            if(this.editMode){
+                this.displayService.updateShopCity(city, this.city, this.shopName, this.manageShop);
+            }
+            else {
+                this.displayService.insertShop(city, this.manageShop);
+            }
         }
+
         this.shopName = this.manageShop.name;
         this.editMode = true;
+        this.city = city;
     }
 
     addBeer(name: string, price: number, photo: string, perc: number, ibu: number, plato: number): void {
@@ -105,5 +131,13 @@ export class ManagmentService {
 
     getShop(): Shop {
         return this.manageShop;
+    }
+
+    getCities(): string[] {
+        return this.cities.slice();
+    }
+    
+    getCity(): string {
+        return this.city;
     }
 }
