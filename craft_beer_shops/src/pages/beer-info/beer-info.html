@@ -40,6 +40,12 @@
       <ion-item>Plato: 
         <ion-note item-end>{{ beer.plato }}&#xB0;</ion-note>
       </ion-item>
+      <ion-item>Comments: 
+        <ion-note item-end>{{ commentsLength }}</ion-note>
+      </ion-item>
+      <ion-item>Average: 
+        <ion-note item-end>{{ getAverage }}</ion-note>
+      </ion-item>
     </ion-list>
     
   <ion-list *ngSwitchCase="'comments'">

@@ -31,6 +31,23 @@ export class BeerInfoPage implements OnInit {
     this.viewController.dismiss();
   }
 
+  get getAverage() {
+    let commentsLength = this.commentsLength; 
+
+    if(commentsLength > 0) {
+      let s = 0;
+      this.beer.comments.forEach(e=>{
+        s+=e.rate;
+      });
+      return s/commentsLength;
+    }
+    return "---";
+  }
+
+  get commentsLength() {
+    return this.beer.comments != null ? this.beer.comments.length : 0; 
+  }
+
   onAddComment(): void {
       let alert = this.alertCtrl.create({
         title: 'Add your comment',
