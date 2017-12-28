@@ -12,7 +12,7 @@
 
 <ion-content>
     <ion-searchbar (ionInput)="refreshBeers($event)"></ion-searchbar>
-  <ion-list>
+  <ion-list *ngIf="beersList.length > 0">
     <button ion-item *ngFor="let beer of filteredBeers" (click)="onBeerInfoClick(beer)">
       <ion-thumbnail item-start>
         <img src="{{ beer.photo }}" alt="{{beer.name}} logo">
@@ -20,5 +20,8 @@
       <h2>{{ beer.name }}</h2>
     </button>
   </ion-list>
+  <div padding  *ngIf="beersList.length < 1">
+    <h2 text-center text-wrap>No beers added yet</h2>
+  </div>
 </ion-content>
   
