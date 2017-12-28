@@ -26,8 +26,7 @@ export class ShopsListPage implements OnInit {
   }
 
   onInformation(shop: Shop): void {
-    let modal = this.modalController.create(ShopInfoPage, {shop: shop});
-    console.log(shop);
+    let modal = this.modalController.create(ShopInfoPage, { shop: shop });
     modal.present();
   } 
 
