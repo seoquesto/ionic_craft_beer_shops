@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Page } from 'ionic-angular/navigation/nav-util';
 import { CitiesPage } from '../pages/cities/cities';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
+import { initializeApp } from 'firebase';
 
 @Component({
   templateUrl: 'app.html'
@@ -17,6 +18,16 @@ export class MyApp {
   @ViewChild('content') content: NavController;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuController: MenuController) {
+    
+    initializeApp({
+      apiKey: "AIzaSyCaiVcBBX_s3_eymLcuwpIc1dDuc03JFxY",
+      authDomain: "craft-beer-9033d.firebaseapp.com",
+      databaseURL: "https://craft-beer-9033d.firebaseio.com",
+      projectId: "craft-beer-9033d",
+      storageBucket: "craft-beer-9033d.appspot.com",
+      messagingSenderId: "299241268802"
+    });
+    
     platform.ready().then(() => {
       statusBar.styleDefault();
       splashScreen.hide();
