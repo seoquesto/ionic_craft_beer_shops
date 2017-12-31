@@ -8,6 +8,9 @@
   </ion-header>
   
   <ion-content>
+    <div class="spinner">
+        <ion-spinner text-center name="dots" *ngIf="showSpinner"></ion-spinner>
+    </div>
     <form (ngSubmit)="onSubmit()" #f="ngForm">
       <ion-item>
           <ion-label floating>Name:</ion-label>
@@ -16,10 +19,6 @@
       <ion-item>
           <ion-label floating>Price: </ion-label>
           <ion-input type="number" ngModel name="price" minlength=1 maxlength=5 required></ion-input>
-      </ion-item>
-      <ion-item>
-          <ion-label floating>Photo TODO: </ion-label>
-          <ion-input type="text" ngModel name="photo" value="https://png.icons8.com/cotton/2x//beer.png"></ion-input>
       </ion-item>
       <ion-item>
           <ion-label floating>Percentages: </ion-label>
@@ -33,7 +32,12 @@
           <ion-label floating>PLATO: </ion-label>
           <ion-input type="number" ngModel name="plato" minlength=1 maxlength=2 required></ion-input>
       </ion-item>
-      <button type="submit" [disabled]="!f.valid" ion-button color="light" position="bottom" full>{{ mode }} beer</button>
+      <ion-card padding>
+        <input margin type="file" name="file" (change)="changePhotoFile($event)">
+        <br>
+            <img [src]="photo" alt="photo">
+        </ion-card>
+      <button type="submit" [disabled]="!f.valid || showSpinner" ion-button color="light" position="bottom" full>{{ mode }} beer</button>
       <button type="button" ion-button color="danger" position="bottom" full (click)="onClose()">Close</button>
     </form>
   </ion-content>
