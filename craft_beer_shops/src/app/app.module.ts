@@ -15,6 +15,9 @@ import { CommentService } from '../services/comment.service';
 import { ManagmentPageModule } from '../pages/managment/managment.module';
 import { AuthService } from '../services/auth.service';
 import { ManageBeerPageModule } from '../pages/manage-beer/manage-beer.module';
+import { ManagmentService } from '../services/managment.service';
+import { UploadService } from '../services/upload-file.service';
+import { DownloadService } from '../services/download-service';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { ManageBeerPageModule } from '../pages/manage-beer/manage-beer.module';
     SplashScreen,
     DisplayService,
     CommentService,
+    ManagmentService,
+    DownloadService,
+    UploadService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ],
   entryComponents: [

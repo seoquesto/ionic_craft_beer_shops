@@ -23,6 +23,10 @@
 </ion-header>
       
 <ion-content>
+    <div class="spinner">
+        <ion-spinner text-center *ngIf="showSpinner"></ion-spinner>
+    </div>
+
     <form (onSubmit)="onSubmit()" #f="ngForm">
         <div [ngSwitch]="segment">
             <ion-list *ngSwitchCase="'Shop'">
@@ -49,13 +53,13 @@
                     <ion-input type="text" [(ngModel)]="street" name="street" minlength=5 maxlength=30 required></ion-input>
                 </ion-item>
                 <ion-item>
-                    <ion-label floating>Building number: </ion-label>
                     <ion-input type="number" [(ngModel)]="building" name="building" minlength=1 maxlength=6 required></ion-input>
                 </ion-item>
-                <ion-item>
-                    <ion-label floating>Photo TODO: </ion-label>
-                    <ion-input type="text" [(ngModel)]="photo" name="photo" required></ion-input>
-                </ion-item>
+                    <ion-card padding>
+                        <input margin type="file" name="file" (change)="changePhotoFile($event)">
+                        <br>
+                        <img [src]="photo" alt="photo">
+                    </ion-card>
             </ion-list>
 
             <ion-list *ngSwitchCase="'Beers'">
@@ -85,7 +89,7 @@
         </div>
         <ion-footer no-shadow>
             <ion-toolbar position="bottom">
-              <button [disabled]="!f.valid" ion-button color="secondary" position="bottom" full (click)="onSubmit()">Save data</button>
+              <button [disabled]="!f.valid || showSpinner" ion-button color="secondary" position="bottom" full (click)="onSubmit()">Save data</button>
             </ion-toolbar>
           </ion-footer>
     </form>

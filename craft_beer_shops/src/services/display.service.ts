@@ -43,17 +43,21 @@ export class DisplayService {
     }
 
 
-    getShop(userName: string): {shop: Shop, cityName: string} | null {
+    getShop(userName: string): {shop: Shop, cityName: string} {
+        let searchedShop :{shop: Shop, cityName: string};
+
         this.cities.forEach(e=>{
             if(e.shops!=null && e.shops.length > 0){
                 e.shops.forEach(s=>{
-                    if(s.ownerName===userName){
-                        return {shop: s, cityName: e.name };
+                    if(s.ownerName==userName){
+                        var ob =  {shop: s, cityName: e.name };
+                        searchedShop = ob;
+                        return ob;
                     }
                 });
             }
         });
-        return null;
+        return searchedShop;
     }
 
     getBeer(beername: string) {

@@ -3,6 +3,8 @@ import { DisplayService } from './display.service';
 import { Injectable } from "@angular/core";
 import { Shop } from '../models/shop.model';
 import { AuthService } from './auth.service';
+import { DownloadService } from './download-service';
+import { UploadService } from './upload-file.service';
 
 @Injectable()
 export class ManagmentService {
@@ -15,12 +17,14 @@ export class ManagmentService {
     private cities: string[] = [];
 
     constructor(private displayService: DisplayService,
-                private authService: AuthService) {
+                private authService: AuthService,
+                private downloadFileService: DownloadService,
+                private uploadFileService: UploadService) {
         this.initManagment();
     }
 
     hasShop(): boolean {
-        return this.displayService.getShop(this.ownerName) !=null;
+        return this.displayService.getShop(this.ownerName) != null;
     }
 
     initManagment() {
@@ -30,13 +34,14 @@ export class ManagmentService {
         if(this.hasShop()){
             const temp = this.displayService.getShop(this.ownerName);
             this.manageShop = new Shop(temp.shop.name,
-                                temp.shop.phoneNumber,
-                                temp.shop.postalAddress,
-                                temp.shop.street,
-                                temp.shop.buildingNumber,
-                                temp.shop.photo,
-                                [],
-                                this.ownerName);
+                temp.shop.phoneNumber,
+                temp.shop.postalAddress,
+                temp.shop.street,
+                temp.shop.buildingNumber,
+                temp.shop.photo,
+                [],
+                this.ownerName);
+                
             if(this.manageShop.beers!=null) {
                 temp.shop.beers.forEach(e=>this.manageBeers.push(e));
             }
@@ -52,6 +57,10 @@ export class ManagmentService {
             this.manageShop = new Shop('','','','',null,'',this.manageBeers,this.ownerName);
             this.shopName = '';
         }
+    }
+
+    setPhotoFile(file: File): Promise<string> {
+        return this.uploadFileService.upload(file, this.shopName);
     }
 
     setShopValues(name: string, phone: string, city: string, postal: string, street: string, building: number, photo: string) {

@@ -1,3 +1,4 @@
+import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import { ManagmentService } from './../../services/managment.service';
 import { ManageBeerPage } from './../manage-beer/manage-beer';
 import { Beer } from './../../models/beer.model';
@@ -13,6 +14,8 @@ import { NgForm } from '@angular/forms';
 export class ManagmentPage {
   segment: string = 'Shop';
   editMode: boolean = false;
+  showSpinner: boolean = false;
+  
   @ViewChild('f') form: NgForm;
   
   name: string = '';
@@ -26,7 +29,8 @@ export class ManagmentPage {
   cities:string[] = [];
 
   constructor(private modalController: ModalController,
-              public managmentService: ManagmentService) {
+              public managmentService: ManagmentService,
+              private toastController: ToastController) {
   }
 
   ionViewDidEnter(): void {
@@ -42,8 +46,20 @@ export class ManagmentPage {
     this.photo = shop.photo;
   }
 
-  onSubmit(name: string, phone: string, city: string, postal: string, street: string, building: number, photo: string) {
+  onSubmit() {
     this.managmentService.setShopValues(this.name, this.phone, this.city, this.postal, this.street, this.building, this.photo);
+  }
+
+  async changePhotoFile(event: any) {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+      let file: File = fileList[0];
+      this.presentSpinner();
+      await this.managmentService.setPhotoFile(file).then((data:string)=>{
+        this.photo = data;
+        this.hideSpinner();
+      });
+    }
   }
 
   onDelete(beer: Beer): void {
@@ -51,13 +67,10 @@ export class ManagmentPage {
   }
 
   onEdit(beer: Beer) {
-    //editable beer name
     const beerName = beer.name;
     let modal = this.modalController.create(ManageBeerPage, {
       beer: beer, mode: 'Edit'});
     modal.onDidDismiss((data)=>{
-      //data will be a nullable value if a user will click on the close button
-      //otherwise returns format data {beer: xyz, mode: 'zxc'}
       if(data==null) 
         return;
       this.managmentService.editBeer(beerName,
@@ -86,5 +99,28 @@ export class ManagmentPage {
                                     data.beer.plato);
     });
     modal.present();
+  }
+
+  private presentSpinner(){
+    this.showSpinner = true;
+    //this.spinnerTimeout();
+  }
+
+  private spinnerTimeout() {
+    setTimeout(()=>{
+      if(this.showSpinner){
+        this.hideSpinner();
+        let toast = this.toastController.create({
+          message:'Something went wrong during loading!',
+          duration: 2000,
+          position: 'bottom'
+        });
+        toast.present();
+      }
+    },10000);
+  }
+
+  private hideSpinner() {
+    this.showSpinner = false;
   }
 }
