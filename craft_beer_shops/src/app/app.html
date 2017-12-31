@@ -11,11 +11,25 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button ion-item (click)="openPage(rootPage)">
+            <button ion-item icon-left (click)="openPage(rootPage)">
+                <ion-icon name="beer"></ion-icon>
                 Home
             </button>
-            <button ion-item (click)="openPage(managePage)">
+            <button ion-item icon-left (click)="openPage(managePage)">
+                <ion-icon name="globe"></ion-icon>
                 Manage
+            </button>
+            <button ion-item icon-left (click)="openPage(signinPage)">
+                <ion-icon name="log-in"></ion-icon>
+                Signin
+            </button>
+            <button ion-item icon-left (click)="openPage(signupPage)">
+                <ion-icon name="person"></ion-icon>
+                Signup
+            </button>
+            <button ion-item icon-left (click)="logout()">
+                <ion-icon name="log-out"></ion-icon>
+                Logout
             </button>
         </ion-list>
     </ion-content>

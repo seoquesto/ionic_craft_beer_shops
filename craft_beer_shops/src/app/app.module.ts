@@ -1,3 +1,4 @@
+import { SignupPageModule } from './../pages/signup/signup.module';
 import { ShopInfoPageModule } from './../pages/shop-info/shop-info.module';
 import { DisplayService } from './../services/display.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -18,6 +19,7 @@ import { ManageBeerPageModule } from '../pages/manage-beer/manage-beer.module';
 import { ManagmentService } from '../services/managment.service';
 import { UploadService } from '../services/upload-file.service';
 import { DownloadService } from '../services/download-service';
+import { SigninPageModule } from '../pages/signin/signin.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { DownloadService } from '../services/download-service';
     BeerInfoPageModule,
     ManagmentPageModule,
     ManageBeerPageModule,
+    SigninPageModule,
+    SignupPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [

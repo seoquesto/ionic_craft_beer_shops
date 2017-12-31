@@ -1,3 +1,4 @@
+import { SigninPage } from './../pages/signin/signin';
 import { ManagmentPage } from './../pages/managment/managment';
 import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController } from 'ionic-angular';
@@ -7,6 +8,7 @@ import { Page } from 'ionic-angular/navigation/nav-util';
 import { CitiesPage } from '../pages/cities/cities';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
 import { initializeApp } from 'firebase';
+import { SignupPage } from '../pages/signup/signup';
 
 @Component({
   templateUrl: 'app.html'
@@ -15,6 +17,8 @@ import { initializeApp } from 'firebase';
 export class MyApp {
   rootPage: Page = CitiesPage;
   managePage: Page = ManagmentPage;
+  signinPage: Page = SigninPage;
+  signupPage: Page = SignupPage;
   @ViewChild('content') content: NavController;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuController: MenuController) {
@@ -37,6 +41,10 @@ export class MyApp {
   openPage(page: Page): void {
     this.content.setRoot(page);
     this.menuController.close();
+  }
+
+  logout(): void {
+    
   }
 }
 
