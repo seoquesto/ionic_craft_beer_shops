@@ -22,75 +22,80 @@
     </ion-toolbar>
 </ion-header>
       
-<ion-content>
+<ion-content scroll="false">
     <div class="spinner">
-        <ion-spinner text-center *ngIf="showSpinner"></ion-spinner>
+        <ion-spinner text-center name="dots" *ngIf="showSpinner"></ion-spinner>
     </div>
 
     <form (onSubmit)="onSubmit()" #f="ngForm">
         <div [ngSwitch]="segment">
-            <ion-list *ngSwitchCase="'Shop'">
-                <ion-item>
-                    <ion-label floating>Name:</ion-label>
-                    <ion-input type="text" [(ngModel)]="name" name="name" minlength=1 maxlength=30 required></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>Phone number: </ion-label>
-                    <ion-input type="text" [(ngModel)]="phone" name="phone" minlength=9 maxlength=14 required></ion-input>
-                </ion-item>
-                <ion-item padding-top>
-                    <ion-label>City</ion-label>
-                    <ion-select [(ngModel)]="city" name="city">
-                      <ion-option *ngFor="let c of cities" [value]="c">{{ c }}</ion-option>
-                    </ion-select>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>Postal address: </ion-label>
-                    <ion-input type="text" [(ngModel)]="postal" name="postal" minlength=5 maxlength=8 required></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-label floating>Street: </ion-label>
-                    <ion-input type="text" [(ngModel)]="street" name="street" minlength=5 maxlength=30 required></ion-input>
-                </ion-item>
-                <ion-item>
-                    <ion-input type="number" [(ngModel)]="building" name="building" minlength=1 maxlength=6 required></ion-input>
-                </ion-item>
+
+            <div *ngSwitchCase="'Shop'">
+                <ion-list>
+                    <ion-item>
+                        <ion-label floating>Name:</ion-label>
+                        <ion-input type="text" [(ngModel)]="name" name="name" minlength=1 maxlength=30 required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Phone number: </ion-label>
+                        <ion-input type="text" [(ngModel)]="phone" name="phone" minlength=9 maxlength=14 required></ion-input>
+                    </ion-item>
+                    <ion-item padding-top>
+                        <ion-label>City</ion-label>
+                        <ion-select [(ngModel)]="city" name="city">
+                        <ion-option *ngFor="let c of cities" [value]="c">{{ c }}</ion-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Postal address: </ion-label>
+                        <ion-input type="text" [(ngModel)]="postal" name="postal" minlength=5 maxlength=8 required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label floating>Street: </ion-label>
+                        <ion-input type="text" [(ngModel)]="street" name="street" minlength=5 maxlength=30 required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="number" [(ngModel)]="building" name="building" minlength=1 maxlength=6 required></ion-input>
+                    </ion-item>
                     <ion-card padding>
                         <input margin type="file" name="file" (change)="changePhotoFile($event)">
                         <br>
                         <img [src]="photo" alt="photo">
                     </ion-card>
-            </ion-list>
-
-            <ion-list *ngSwitchCase="'Beers'">
-                <h4>Beers</h4>
-                <ion-list>
-                    <ion-item-sliding *ngFor="let beer of managmentService.getBeers()">
-                        <ion-item>
-                            <ion-avatar item-start>
-                                <img src="{{ beer.photo }}" alt="{{beer.name}} logo">
-                            </ion-avatar>
-                            <h2>{{ beer.name }}</h2>
-                        </ion-item>
-                        <ion-item-options side="right">
-                            <button ion-button color="light" (click)="onEdit(beer)">
-                                <ion-icon name="settings"></ion-icon>
-                            </button>
-                            <button ion-button color="danger" (click)="onDelete(beer)">
-                                <ion-icon name="trash"></ion-icon>
-                            </button>
-                        </ion-item-options>
-                    </ion-item-sliding>
                 </ion-list>
-                <button ion-button color="light" full (click)="onAdd()">
-                    <ion-icon name="add"> Add beer</ion-icon>
-                </button>
-            </ion-list>
-        </div>
-        <ion-footer no-shadow>
+            </div>
+
+            <div *ngSwitchCase="'Beers'">
+                <ion-list>
+                    <h4>Beers</h4>
+                    <ion-list>
+                        <ion-item-sliding *ngFor="let beer of managmentService.getBeers()">
+                            <ion-item>
+                                <ion-avatar item-start>
+                                    <img src="{{ beer.photo }}" alt="{{beer.name}} logo">
+                                </ion-avatar>
+                                <h2>{{ beer.name }}</h2>
+                            </ion-item>
+                            <ion-item-options side="right">
+                                <button ion-button color="light" (click)="onEdit(beer)">
+                                    <ion-icon name="settings"></ion-icon>
+                                </button>
+                                <button ion-button color="danger" (click)="onDelete(beer)">
+                                    <ion-icon name="trash"></ion-icon>
+                                </button>
+                            </ion-item-options>
+                        </ion-item-sliding>
+                    </ion-list>
+                    <button ion-button color="light" full (click)="onAdd()">
+                        <ion-icon name="add"> Add beer</ion-icon>
+                    </button>
+                </ion-list>
+            </div>
+
             <ion-toolbar position="bottom">
-              <button [disabled]="!f.valid || showSpinner" ion-button color="secondary" position="bottom" full (click)="onSubmit()">Save data</button>
+                <button [disabled]="!f.valid || showSpinner" ion-button color="secondary" position="bottom" full (click)="onSubmit()">Save data</button>
             </ion-toolbar>
-          </ion-footer>
+
+        </div>
     </form>
 </ion-content>
