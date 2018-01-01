@@ -32,7 +32,7 @@ export class SigninPage {
     if(message != null && message.trim().length > 1)
     {
       const alert: Alert = this.alertController.create({
-                                  title: 'Error',
+                                  title: 'Signin failed!',
                                   message: message,
                                   buttons: ['Ok']});
       alert.present();

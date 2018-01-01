@@ -7,7 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { Page } from 'ionic-angular/navigation/nav-util';
 import { CitiesPage } from '../pages/cities/cities';
 import { MenuController } from 'ionic-angular/components/app/menu-controller';
-import { initializeApp } from 'firebase';
+import { initializeApp, auth } from 'firebase';
 import { SignupPage } from '../pages/signup/signup';
 
 @Component({
@@ -19,6 +19,7 @@ export class MyApp {
   managePage: Page = ManagmentPage;
   signinPage: Page = SigninPage;
   signupPage: Page = SignupPage;
+  isAuth:boolean = true;
   @ViewChild('content') content: NavController;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuController: MenuController) {
@@ -30,6 +31,16 @@ export class MyApp {
       projectId: "craft-beer-9033d",
       storageBucket: "craft-beer-9033d.appspot.com",
       messagingSenderId: "299241268802"
+    });
+
+    auth().onAuthStateChanged(user=>{
+      if(user) {
+        this.isAuth = true;
+        this.content.setRoot(this.rootPage);
+      } else {
+        this.isAuth = false;
+        this.content.setRoot(this.signinPage);
+      }
     });
     
     platform.ready().then(() => {

@@ -11,23 +11,23 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button ion-item icon-left (click)="openPage(rootPage)">
+            <button *ngIf="isAuth" ion-item icon-left (click)="openPage(rootPage)">
                 <ion-icon name="beer"></ion-icon>
                 Home
             </button>
-            <button ion-item icon-left (click)="openPage(managePage)">
+            <button *ngIf="isAuth" ion-item icon-left (click)="openPage(managePage)">
                 <ion-icon name="globe"></ion-icon>
                 Manage
             </button>
-            <button ion-item icon-left (click)="openPage(signinPage)">
+            <button *ngIf="!isAuth" ion-item icon-left (click)="openPage(signinPage)">
                 <ion-icon name="log-in"></ion-icon>
                 Signin
             </button>
-            <button ion-item icon-left (click)="openPage(signupPage)">
+            <button *ngIf="!isAuth" ion-item icon-left (click)="openPage(signupPage)">
                 <ion-icon name="person"></ion-icon>
                 Signup
             </button>
-            <button ion-item icon-left (click)="logout()">
+            <button *ngIf="isAuth" ion-item icon-left (click)="logout()">
                 <ion-icon name="log-out"></ion-icon>
                 Logout
             </button>
