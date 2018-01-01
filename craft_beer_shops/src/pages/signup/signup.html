@@ -9,5 +9,18 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Mail: </ion-label>
+        <ion-input type="email" ngModel name="email" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password: </ion-label>
+        <ion-input type="password" ngModel name="password" [minlength]="6" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!f.valid">Submit</button>
+  </form>
 </ion-content>
