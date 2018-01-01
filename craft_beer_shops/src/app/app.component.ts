@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth.service';
 import { SigninPage } from './../pages/signin/signin';
 import { ManagmentPage } from './../pages/managment/managment';
 import { Component, ViewChild } from '@angular/core';
@@ -22,7 +23,10 @@ export class MyApp {
   isAuth:boolean = true;
   @ViewChild('content') content: NavController;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, private menuController: MenuController) {
+  constructor(platform: Platform, statusBar: StatusBar,
+    splashScreen: SplashScreen,
+    private menuController: MenuController,
+    private authService: AuthService) {
     
     initializeApp({
       apiKey: "AIzaSyCaiVcBBX_s3_eymLcuwpIc1dDuc03JFxY",
@@ -36,10 +40,10 @@ export class MyApp {
     auth().onAuthStateChanged(user=>{
       if(user) {
         this.isAuth = true;
-        this.content.setRoot(this.rootPage);
+        this.rootPage = CitiesPage;
       } else {
         this.isAuth = false;
-        this.content.setRoot(this.signinPage);
+        this.rootPage = SigninPage;
       }
     });
     
@@ -55,7 +59,9 @@ export class MyApp {
   }
 
   logout(): void {
-    
+    this.authService.logout();
+    this.menuController.close();
+    this.content.setRoot(SigninPage);
   }
 }
 
