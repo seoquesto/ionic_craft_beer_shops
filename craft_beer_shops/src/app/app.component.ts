@@ -1,3 +1,4 @@
+import { User } from './../models/user.model';
 import { AuthService } from './../services/auth.service';
 import { SigninPage } from './../pages/signin/signin';
 import { ManagmentPage } from './../pages/managment/managment';
@@ -23,7 +24,8 @@ export class MyApp {
   isAuth:boolean = true;
   @ViewChild('content') content: NavController;
 
-  constructor(platform: Platform, statusBar: StatusBar,
+  constructor(platform: Platform,
+    statusBar: StatusBar,
     splashScreen: SplashScreen,
     private menuController: MenuController,
     private authService: AuthService) {
@@ -38,11 +40,16 @@ export class MyApp {
     });
 
     auth().onAuthStateChanged(user=>{
+      //should be to select during signup
+      let photoToRemove = `https://www.shareicon.net/data/128x128/2015/09/18/103160_man_512x512.png`;
+      //
       if(user) {
-        this.isAuth = true;
+        this.isAuth = this.authService.IS_AUTH = true;
+        this.authService.USER_ = new User(user.email, photoToRemove);
         this.rootPage = CitiesPage;
       } else {
-        this.isAuth = false;
+        this.isAuth = this.authService.IS_AUTH = false;
+        this.authService.USER_ = null;
         this.rootPage = SigninPage;
       }
     });

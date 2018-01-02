@@ -13,4 +13,5 @@ import { BeersListPage } from './beers-list';
     BeersListPage
   ]
 })
-export class BeersListPageModule {}
+
+export class BeersListPageModule { }

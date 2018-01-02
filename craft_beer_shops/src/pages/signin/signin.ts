@@ -15,7 +15,7 @@ export class SigninPage {
     private alertController: AlertController,
     private loadingController: LoadingController) { }
 
-  onSubmit(form: NgForm) {
+  onSubmit(form: NgForm): void {
     this.createLoadingTile();
     this.authService.signin(form.form.get('email').value,
                             form.form.get('email').value)

@@ -55,12 +55,13 @@
                         <ion-input type="text" [(ngModel)]="street" name="street" minlength=5 maxlength=30 required></ion-input>
                     </ion-item>
                     <ion-item>
+                        <ion-label floating>Building number: </ion-label>
                         <ion-input type="number" [(ngModel)]="building" name="building" minlength=1 maxlength=6 required></ion-input>
                     </ion-item>
                     <ion-card padding>
                         <input margin type="file" name="file" (change)="changePhotoFile($event)">
                         <br>
-                        <img [src]="photo" alt="photo">
+                        <img *ngIf="photo != ''" [src]="photo" alt="photo">
                     </ion-card>
                 </ion-list>
             </div>
@@ -71,9 +72,9 @@
                     <ion-list>
                         <ion-item-sliding *ngFor="let beer of managmentService.getBeers()">
                             <ion-item>
-                                <ion-avatar item-start>
+                                <ion-thumbnail item-start>
                                     <img src="{{ beer.photo }}" alt="{{beer.name}} logo">
-                                </ion-avatar>
+                                </ion-thumbnail>
                                 <h2>{{ beer.name }}</h2>
                             </ion-item>
                             <ion-item-options side="right">

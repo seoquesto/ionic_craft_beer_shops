@@ -15,6 +15,7 @@ export class ManagmentPage {
   segment: string = 'Shop';
   editMode: boolean = false;
   showSpinner: boolean = false;
+  private submitedPage:boolean[] = [false,false];
   
   @ViewChild('f') form: NgForm;
   
@@ -46,11 +47,31 @@ export class ManagmentPage {
     this.photo = shop.photo;
   }
 
-  onSubmit() {
+  onSubmit(): void {
+    if(this.segment=='Shop') {
+      this.submitedPage[0] = true;
+      if(!this.submitedPage[1]) {
+        this.segment = 'Beers';
+        return;
+      }
+    } else if(this.segment == 'Beers') {
+      this.submitedPage[1] = true;
+      if(!this.submitedPage[0]) {
+        this.segment = 'Shop';
+        return;
+      }
+    }
+
+    if(!this.submitedPage[0] || !this.submitedPage[1]) {
+      return;
+    }
+
     this.managmentService.setShopValues(this.name, this.phone, this.city, this.postal, this.street, this.building, this.photo);
+    let toast = this.toastController.create({message:'Uploaded!', duration:1200});
+    toast.present();
   }
 
-  async changePhotoFile(event: any) {
+  async changePhotoFile(event: any): Promise<void> {
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {
       let file: File = fileList[0];
@@ -66,7 +87,7 @@ export class ManagmentPage {
     this.managmentService.removeBeer(beer);
   }
 
-  onEdit(beer: Beer) {
+  onEdit(beer: Beer): void {
     const beerName = beer.name;
     let modal = this.modalController.create(ManageBeerPage, {
       beer: beer, mode: 'Edit'});
@@ -84,7 +105,7 @@ export class ManagmentPage {
     modal.present();
   }
 
-  onAdd() {
+  onAdd(): void {
     let beer = new Beer('',null,'',null,null,null,[]);
     let modal = this.modalController.create(ManageBeerPage, {
       beer: beer, mode: 'Add'});
@@ -101,26 +122,11 @@ export class ManagmentPage {
     modal.present();
   }
 
-  private presentSpinner(){
+  private presentSpinner(): void{
     this.showSpinner = true;
-    //this.spinnerTimeout();
   }
 
-  private spinnerTimeout() {
-    setTimeout(()=>{
-      if(this.showSpinner){
-        this.hideSpinner();
-        let toast = this.toastController.create({
-          message:'Something went wrong during loading!',
-          duration: 2000,
-          position: 'bottom'
-        });
-        toast.present();
-      }
-    },10000);
-  }
-
-  private hideSpinner() {
+  private hideSpinner(): void {
     this.showSpinner = false;
   }
 }

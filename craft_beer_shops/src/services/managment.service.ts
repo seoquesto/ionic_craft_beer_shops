@@ -3,7 +3,6 @@ import { DisplayService } from './display.service';
 import { Injectable } from "@angular/core";
 import { Shop } from '../models/shop.model';
 import { AuthService } from './auth.service';
-import { DownloadService } from './download-service';
 import { UploadService } from './upload-file.service';
 
 @Injectable()
@@ -18,7 +17,6 @@ export class ManagmentService {
 
     constructor(private displayService: DisplayService,
                 private authService: AuthService,
-                private downloadFileService: DownloadService,
                 private uploadFileService: UploadService) {
         this.initManagment();
     }
@@ -28,7 +26,7 @@ export class ManagmentService {
     }
 
     initManagment() {
-        this.ownerName = this.authService.getUser().name;
+        this.ownerName = this.authService.USER_.name;
         this.cities = this.displayService.getCitiesString();
 
         if(this.hasShop()){

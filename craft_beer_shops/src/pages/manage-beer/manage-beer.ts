@@ -25,6 +25,8 @@ export class ManageBeerPage implements OnInit {
   ngOnInit(): void {
     this.beer = this.navParams.get('beer');
     this.mode = this.navParams.get('mode');
+    this.photo = this.beer.photo;
+    console.log(this.photo);
   }
 
   ionViewDidEnter() {
@@ -62,7 +64,7 @@ export class ManageBeerPage implements OnInit {
                     comments);
   }
 
-  async changePhotoFile(event: any) {
+  async changePhotoFile(event: any): Promise<void> {
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {
       let file: File = fileList[0];
@@ -74,11 +76,11 @@ export class ManageBeerPage implements OnInit {
     }
   }
 
-  private presentSpinner(){
+  private presentSpinner(): void{
     this.showSpinner = true;
   }
 
-  private hideSpinner() {
+  private hideSpinner(): void {
     this.showSpinner = false;
   }
 }

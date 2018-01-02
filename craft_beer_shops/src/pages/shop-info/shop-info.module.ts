@@ -13,4 +13,5 @@ import { ShopInfoPage } from './shop-info';
     ShopInfoPage
   ]
 })
-export class ShopInfoPageModule {}
+
+export class ShopInfoPageModule { }

@@ -11,4 +11,5 @@ import { SignupPage } from './signup';
   ],
   entryComponents: [SignupPage]
 })
-export class SignupPageModule {}
+
+export class SignupPageModule { }

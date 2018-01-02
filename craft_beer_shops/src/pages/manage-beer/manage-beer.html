@@ -35,7 +35,7 @@
       <ion-card padding>
         <input margin type="file" name="file" (change)="changePhotoFile($event)">
         <br>
-            <img [src]="photo" alt="photo">
+        <img *ngIf="photo!=''" [src]="photo" alt="photo">
         </ion-card>
       <button type="submit" [disabled]="!f.valid || showSpinner" ion-button color="light" position="bottom" full>{{ mode }} beer</button>
       <button type="button" ion-button color="danger" position="bottom" full (click)="onClose()">Close</button>

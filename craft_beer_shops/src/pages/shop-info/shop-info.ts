@@ -7,6 +7,7 @@ import { NavParams } from 'ionic-angular';
   selector: 'page-shop-info',
   templateUrl: 'shop-info.html',
 })
+
 export class ShopInfoPage implements OnInit {
   shop: Shop;
   

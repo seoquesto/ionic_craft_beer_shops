@@ -15,4 +15,5 @@ import { FormsModule } from '@angular/forms';
     ManageBeerPage
   ]
 })
-export class ManageBeerPageModule {}
+
+export class ManageBeerPageModule { }

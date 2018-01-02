@@ -19,7 +19,7 @@ export class ShopsListPage implements OnInit {
               private navController: NavController,
               private modalController: ModalController) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.city = this.navParams.get('city');  
     this.shops = this.navParams.get('shops');
     this.filteredShops = this.shops;
@@ -35,7 +35,7 @@ export class ShopsListPage implements OnInit {
       shopName: shop.name, beers: shop.beers});
   }
 
-  refreshShops(ev: any) {
+  refreshShops(ev: any): void {
     let val: string = ev.target.value;
     if(val!=null && val.trim()!='') {
       const valCompare = val.trim().toLowerCase();

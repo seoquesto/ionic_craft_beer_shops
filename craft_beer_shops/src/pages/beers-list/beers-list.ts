@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: 'beers-list.html',
 })
 
-export class BeersListPage implements OnInit{
+export class BeersListPage implements OnInit {
   shopName: string = '';
   beersList: Beer[];
   filteredBeers: Beer[];
@@ -23,13 +23,13 @@ export class BeersListPage implements OnInit{
     this.filteredBeers = this.beersList;
   }
 
-  onBeerInfoClick(beer: Beer) {
+  onBeerInfoClick(beer: Beer): void {
     const modal = this.modalController.create(BeerInfoPage, {
       beer: beer})
     modal.present();
   }
 
-  refreshBeers(ev: any) {
+  refreshBeers(ev: any): void {
     let val: string = ev.target.value;
     if(val!=null && val.trim()!='') {
       const valCompare = val.trim().toLowerCase();

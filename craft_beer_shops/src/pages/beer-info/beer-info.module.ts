@@ -13,4 +13,6 @@ import { BeerInfoPage } from './beer-info';
     BeerInfoPage
   ]
 })
-export class BeerInfoPageModule {}
+
+export class BeerInfoPageModule {
+}

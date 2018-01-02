@@ -3,25 +3,22 @@ import * as firebase from 'firebase';
 import { auth } from 'firebase';
 
 export class AuthService {
-    private user = new User('Adam','https://www.shareicon.net/data/128x128/2015/09/18/103160_man_512x512.png');
-    
+    USER_:User = null;
+    IS_AUTH: boolean = false;
+
     isAuthenticated(): boolean {
         return true;
     }
-    
-    getUser() {
-        return this.user;
-    }
 
-    signup(email: string, password: string) {
+    signup(email: string, password: string): Promise<any> {
         return firebase.auth().createUserWithEmailAndPassword(email, password);
     }
 
-    signin(email: string, password: string) {
+    signin(email: string, password: string): Promise<any> {
         return firebase.auth().signInWithEmailAndPassword(email, password);
     }
 
-    logout(): void {
-        auth().signOut();
+    logout(): Promise<any> {
+        return auth().signOut();
     }
 }
