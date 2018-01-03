@@ -1,3 +1,4 @@
+import { LoadingService } from './../../services/loading.service';
 import { BeerComment } from './../../models/beer-comment.model';
 import { NgForm } from '@angular/forms';
 import { Beer } from './../../models/beer.model';
@@ -16,11 +17,11 @@ export class ManageBeerPage implements OnInit {
   beer: Beer;
   mode: string = 'Edit';
   photo: string = '';
-  showSpinner: boolean = false;
   
   constructor(private navParams: NavParams,
               private viewController: ViewController,
-              private managmentService: ManagmentService) { }
+              private managmentService: ManagmentService,
+              private loadingService: LoadingService) { }
   
   ngOnInit(): void {
     this.beer = this.navParams.get('beer');
@@ -67,19 +68,11 @@ export class ManageBeerPage implements OnInit {
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {
       let file: File = fileList[0];
-      this.presentSpinner();
+      this.loadingService.createLoadingTile("Uploading photo...");
       await this.managmentService.setPhotoFile(file).then((data:string)=>{
         this.photo = data;
-        this.hideSpinner();
+        this.loadingService.hideLoadingTile();
       });
     }
-  }
-
-  private presentSpinner(): void{
-    this.showSpinner = true;
-  }
-
-  private hideSpinner(): void {
-    this.showSpinner = false;
   }
 }

@@ -1,7 +1,8 @@
+import { LoadingService } from './../../services/loading.service';
 import { AuthService } from './../../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
-import { Loading, AlertController, LoadingController, Alert } from 'ionic-angular';
+import { Alert, AlertController } from 'ionic-angular';
 
 @Component({
   selector: 'page-signin',
@@ -9,21 +10,20 @@ import { Loading, AlertController, LoadingController, Alert } from 'ionic-angula
 })
 
 export class SigninPage {
-  private loading: Loading;
 
   constructor(private authService: AuthService, 
     private alertController: AlertController,
-    private loadingController: LoadingController) { }
+    private loadingService: LoadingService) { }
 
   onSubmit(form: NgForm): void {
-    this.createLoadingTile();
+    this.loadingService.createLoadingTile('Signing you up..');
     this.authService.signin(form.form.get('email').value,
                             form.form.get('email').value)
                     .then((data)=> {
-                      this.hideLoadingTile();
+                      this.loadingService.hideLoadingTile();
                     })
                     .catch((error)=>{
-                      this.hideLoadingTile();
+                      this.loadingService.hideLoadingTile();
                       this.backendAllert(error.message);
                     });
   }
@@ -37,16 +37,5 @@ export class SigninPage {
                                   buttons: ['Ok']});
       alert.present();
     }
-  }
-
-  private createLoadingTile(): void {
-    this.loading = this.loadingController.create({
-      content: 'Signing you up...'
-    });
-    this.loading.present();
-  }
-
-  private hideLoadingTile(): void {
-    this.loading.dismiss();
   }
 }

@@ -23,10 +23,6 @@
 </ion-header>
       
 <ion-content scroll="false">
-    <div class="spinner">
-        <ion-spinner text-center name="dots" *ngIf="showSpinner"></ion-spinner>
-    </div>
-
     <form (onSubmit)="onSubmit()" #f="ngForm">
         <div [ngSwitch]="segment">
 

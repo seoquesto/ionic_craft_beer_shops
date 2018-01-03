@@ -1,3 +1,4 @@
+import { LoadingService } from './../../services/loading.service';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import { ManagmentService } from './../../services/managment.service';
 import { ManageBeerPage } from './../manage-beer/manage-beer';
@@ -31,7 +32,8 @@ export class ManagmentPage {
 
   constructor(private modalController: ModalController,
               public managmentService: ManagmentService,
-              private toastController: ToastController) {
+              private toastController: ToastController,
+              private loadingService: LoadingService) {
   }
 
   ionViewDidEnter(): void {
@@ -75,10 +77,12 @@ export class ManagmentPage {
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {
       let file: File = fileList[0];
-      this.presentSpinner();
+      this.loadingService.createLoadingTile('Uploading photo..');
+      this.showSpinner = true;
       await this.managmentService.setPhotoFile(file).then((data:string)=>{
         this.photo = data;
-        this.hideSpinner();
+        this.loadingService.hideLoadingTile();        
+        this.showSpinner = false;
       });
     }
   }
@@ -120,13 +124,5 @@ export class ManagmentPage {
                                     data.beer.plato);
     });
     modal.present();
-  }
-
-  private presentSpinner(): void{
-    this.showSpinner = true;
-  }
-
-  private hideSpinner(): void {
-    this.showSpinner = false;
   }
 }

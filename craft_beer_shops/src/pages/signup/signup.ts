@@ -1,10 +1,9 @@
+import { LoadingService } from './../../services/loading.service';
 import { UploadService } from './../../services/upload-file.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AuthService } from './../../services/auth.service';
 import { NgForm } from '@angular/forms';
 import { Component } from '@angular/core';
-import { LoadingController } from 'ionic-angular/components/loading/loading-controller';
-import { Loading } from 'ionic-angular';
 import { Alert } from 'ionic-angular/components/alert/alert';
 
 @Component({
@@ -13,31 +12,30 @@ import { Alert } from 'ionic-angular/components/alert/alert';
 })
 
 export class SignupPage {
-  private loading: Loading;
   avatarUrl: string = '';
 
   constructor(private authService: AuthService, 
               private alertController: AlertController,
-              private loadingController: LoadingController,
-              private uploadService: UploadService) { }
+              private uploadService: UploadService,
+              private loadingService: LoadingService) { }
 
   onSubmit(form: NgForm): void {
-    this.createLoadingTile( 'Signing you up...');
+    this.loadingService.createLoadingTile( 'Signing you up...');
     const emailValue: string = form.form.get('email').value;
     const passwordValue: string = form.form.get('password').value;
     this.authService.signup(emailValue, passwordValue)
                     .then((result)=>{
                       this.authService.updateProfile(emailValue, this.avatarUrl)
                                       .then((result)=>{
-                                        this.hideLoadingTile();
+                                        this.loadingService.hideLoadingTile();
                                       })
                                       .catch((error)=>{
-                                        this.hideLoadingTile();
+                                        this.loadingService.hideLoadingTile();
                                         this.backendAllert(error.message);
                                       });
                     })
                     .catch((error)=>{
-                      this.hideLoadingTile();
+                      this.loadingService.hideLoadingTile();
                       this.backendAllert(error.message);
                     });
   }
@@ -46,10 +44,10 @@ export class SignupPage {
     let fileList: FileList = event.target.files;
     if(fileList.length > 0) {
       let file: File = fileList[0];
-      this.createLoadingTile('Avatar uploading..');
+      this.loadingService.createLoadingTile('Avatar uploading..');
       this.uploadService.upload(file, 'avatars').then((data:string)=>{
         this.avatarUrl = data;
-        this.hideLoadingTile();
+        this.loadingService.hideLoadingTile();
       });
     }
   }
@@ -63,16 +61,5 @@ export class SignupPage {
                                   buttons: ['Ok']});
       alert.present();
     }
-  }
-
-  private createLoadingTile(loadingMessage: string): void {
-    this.loading = this.loadingController.create({
-      content: loadingMessage
-    });
-    this.loading.present();
-  }
-
-  private hideLoadingTile(): void {
-    this.loading.dismiss();
   }
 }
