@@ -33,7 +33,6 @@ export class BeerInfoPage implements OnInit {
 
   get getAverage(): number | string {
     let commentsLength = this.commentsLength; 
-    console.log(commentsLength);
     if(commentsLength > 0) {
       let s: number = 0;
       this.beer.comments.forEach(e=>{

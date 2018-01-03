@@ -1,3 +1,4 @@
+import { UploadService } from './../../services/upload-file.service';
 import { AlertController } from 'ionic-angular/components/alert/alert-controller';
 import { AuthService } from './../../services/auth.service';
 import { NgForm } from '@angular/forms';
@@ -13,22 +14,44 @@ import { Alert } from 'ionic-angular/components/alert/alert';
 
 export class SignupPage {
   private loading: Loading;
+  avatarUrl: string = '';
 
   constructor(private authService: AuthService, 
               private alertController: AlertController,
-              private loadingController: LoadingController) { }
+              private loadingController: LoadingController,
+              private uploadService: UploadService) { }
 
   onSubmit(form: NgForm): void {
-    this.createLoadingTile();
-    this.authService.signup(form.form.get('email').value, 
-                            form.form.get('password').value)
-                            .then((result)=>{
-                              this.hideLoadingTile();
-                            })
-                            .catch((error)=>{
-                              this.hideLoadingTile();
-                              this.backendAllert(error.message);
-                            });
+    this.createLoadingTile( 'Signing you up...');
+    const emailValue: string = form.form.get('email').value;
+    const passwordValue: string = form.form.get('password').value;
+    this.authService.signup(emailValue, passwordValue)
+                    .then((result)=>{
+                      this.authService.updateProfile(emailValue, this.avatarUrl)
+                                      .then((result)=>{
+                                        this.hideLoadingTile();
+                                      })
+                                      .catch((error)=>{
+                                        this.hideLoadingTile();
+                                        this.backendAllert(error.message);
+                                      });
+                    })
+                    .catch((error)=>{
+                      this.hideLoadingTile();
+                      this.backendAllert(error.message);
+                    });
+  }
+
+  async changeAvatarPhoto(event: any): Promise<void> {
+    let fileList: FileList = event.target.files;
+    if(fileList.length > 0) {
+      let file: File = fileList[0];
+      this.createLoadingTile('Avatar uploading..');
+      this.uploadService.upload(file, 'avatars').then((data:string)=>{
+        this.avatarUrl = data;
+        this.hideLoadingTile();
+      });
+    }
   }
 
   private backendAllert(message: string): void {
@@ -42,9 +65,9 @@ export class SignupPage {
     }
   }
 
-  private createLoadingTile(): void {
+  private createLoadingTile(loadingMessage: string): void {
     this.loading = this.loadingController.create({
-      content: 'Signing you up...'
+      content: loadingMessage
     });
     this.loading.present();
   }

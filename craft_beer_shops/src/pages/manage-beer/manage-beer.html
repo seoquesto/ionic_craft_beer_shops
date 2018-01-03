@@ -37,7 +37,7 @@
         <br>
         <img *ngIf="photo!=''" [src]="photo" alt="photo">
         </ion-card>
-      <button type="submit" [disabled]="!f.valid || showSpinner" ion-button color="light" position="bottom" full>{{ mode }} beer</button>
+      <button type="submit" [disabled]="!f.valid || showSpinner || avatarUrl==''" ion-button color="light" position="bottom" full>{{ mode }} beer</button>
       <button type="button" ion-button color="danger" position="bottom" full (click)="onClose()">Close</button>
     </form>
   </ion-content>

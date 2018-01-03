@@ -40,12 +40,9 @@ export class MyApp {
     });
 
     auth().onAuthStateChanged(user=>{
-      //should be to select during signup
-      let photoToRemove = `https://www.shareicon.net/data/128x128/2015/09/18/103160_man_512x512.png`;
-      //
       if(user) {
         this.isAuth = this.authService.IS_AUTH = true;
-        this.authService.USER_ = new User(user.email, photoToRemove);
+        this.authService.USER_ = new User(user.email, user.photoURL);
         this.rootPage = CitiesPage;
       } else {
         this.isAuth = this.authService.IS_AUTH = false;

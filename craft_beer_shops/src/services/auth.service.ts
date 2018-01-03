@@ -10,15 +10,22 @@ export class AuthService {
         return true;
     }
 
-    signup(email: string, password: string): Promise<any> {
+    async signup(email: string, password: string): Promise<any> {
         return firebase.auth().createUserWithEmailAndPassword(email, password);
     }
 
-    signin(email: string, password: string): Promise<any> {
+    async updateProfile(displayName: string, photoUrl: string): Promise<any> {
+        return firebase.auth().currentUser.updateProfile({
+            displayName: displayName,
+            photoURL: photoUrl
+        });
+    }
+
+    async signin(email: string, password: string): Promise<any> {
         return firebase.auth().signInWithEmailAndPassword(email, password);
     }
 
-    logout(): Promise<any> {
+    async logout(): Promise<any> {
         return auth().signOut();
     }
 }

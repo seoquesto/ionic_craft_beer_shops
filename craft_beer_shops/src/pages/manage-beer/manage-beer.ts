@@ -26,7 +26,6 @@ export class ManageBeerPage implements OnInit {
     this.beer = this.navParams.get('beer');
     this.mode = this.navParams.get('mode');
     this.photo = this.beer.photo;
-    console.log(this.photo);
   }
 
   ionViewDidEnter() {

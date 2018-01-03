@@ -21,6 +21,11 @@
         <ion-input type="password" ngModel name="password" [minlength]="6" required></ion-input>
       </ion-item>
     </ion-list>
-    <button ion-button block type="submit" [disabled]="!f.valid">Submit</button>
+    <ion-card padding>
+      <input margin type="file" name="file" (change)="changeAvatarPhoto($event)">
+      <br>
+      <img *ngIf="avatarUrl!=''" [src]="avatarUrl" alt="photo">
+    </ion-card>
+    <button ion-button block type="submit" [disabled]="!f.valid || avatarUrl==''">Submit</button>
   </form>
 </ion-content>
