@@ -81,7 +81,7 @@
                                     <ion-icon name="trash"></ion-icon>
                                 </button>
                             </ion-item-options>
-                        </ion-item-sliding>
+                        </ion-item-sliding> 
                     </ion-list>
                     <button ion-button color="light" full (click)="onAdd()">
                         <ion-icon name="add"> Add beer</ion-icon>
@@ -93,11 +93,6 @@
                 <ion-grid>
                     <ion-row>
                         <ion-col>
-                            <button ion-button block outline type="button" icon-left (click)="onLocate()">
-                                <ion-icon name="locate">Locate me</ion-icon>
-                            </button>
-                        </ion-col>
-                        <ion-col>
                             <button ion-button block outline type="button" icon-left (click)="onOpenMap()">
                                 <ion-icon name="map">Select on Map</ion-icon>
                             </button>
@@ -105,7 +100,10 @@
                     </ion-row>
                     <ion-row>
                         <ion-col>
-                            <p>Selected Place ...</p>
+                            <agm-map *ngIf="location" [latitude]="location.lat" [longitude]="location.lng" [zoom]="16">
+                                <agm-marker [latitude]="location.lat" [longitude]="location.lng">
+                                </agm-marker>
+                              </agm-map>
                         </ion-col>
                     </ion-row>
                 </ion-grid>

@@ -1,3 +1,4 @@
+import { Location } from './location.model';
 import { Beer } from "./beer.model";
 
 export class Shop {
@@ -8,5 +9,6 @@ export class Shop {
                 public buildingNumber: number,
                 public photo: string, 
                 public beers: Beer[],
-                public ownerName: string) { }
+                public ownerName: string,
+                public location: Location) { }
 }

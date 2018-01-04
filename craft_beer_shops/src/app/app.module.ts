@@ -22,6 +22,7 @@ import { UploadService } from '../services/upload-file.service';
 import { SigninPageModule } from '../pages/signin/signin.module';
 import { LoadingService } from '../services/loading.service';
 
+
 @NgModule({
   declarations: [
     MyApp

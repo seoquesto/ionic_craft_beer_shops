@@ -1,3 +1,4 @@
+import { Location } from './../../models/location.model';
 import { LoadingService } from './../../services/loading.service';
 import { ToastController } from 'ionic-angular/components/toast/toast-controller';
 import { ManagmentService } from './../../services/managment.service';
@@ -6,6 +7,7 @@ import { Beer } from './../../models/beer.model';
 import { ModalController } from 'ionic-angular/components/modal/modal-controller';
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { SetLocationPage } from '../set-location/set-location';
 
 @Component({
   selector: 'page-managment',
@@ -17,6 +19,7 @@ export class ManagmentPage {
   editMode: boolean = false;
   showSpinner: boolean = false;
   private submitedPage: boolean[] = [false,false,false];
+  location: Location;
   
   @ViewChild('f') form: NgForm;
   
@@ -47,6 +50,8 @@ export class ManagmentPage {
     this.street = shop.street;
     this.building = shop.buildingNumber;
     this.photo = shop.photo;
+
+    this.location = this.managmentService.getShopLocation();
   }
 
   onSubmit(): void {
@@ -86,17 +91,30 @@ export class ManagmentPage {
       return;
     }
 
-    this.managmentService.setShopValues(this.name, this.phone, this.city, this.postal, this.street, this.building, this.photo);
+    if(this.location == null) {
+      this.segment = 'Location';
+      this.toastController.create({message: 'Plese select location!.', duration:1500, showCloseButton: true}).present();
+
+      return;
+    }
+
+    this.managmentService.setShopValues(this.name, this.phone, this.city, this.postal, this.street, this.building, this.photo, this.location);
     let toast = this.toastController.create({message:'Uploaded!', duration:1200});
     toast.present();
   }
 
-  onLocate(): void {
-
-  }
-
   onOpenMap(): void {
-    
+    let modal = this.modalController.create(SetLocationPage, {
+      lat: this.location==null ? 0 : this.location.lat, 
+      lng: this.location==null ? 0 : this.location.lng, 
+      hasAlreadyLocation: this.location != null } );
+
+    modal.onDidDismiss((data)=>{
+      if(data==null) 
+        return;
+      this.location = new Location(data.location.lat, data.location.lng);
+    });
+    modal.present();
   }
 
   async changePhotoFile(event: any): Promise<void> {

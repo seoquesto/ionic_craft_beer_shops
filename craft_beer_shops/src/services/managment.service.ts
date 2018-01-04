@@ -1,3 +1,4 @@
+import { Location } from './../models/location.model';
 import { Beer } from './../models/beer.model';
 import { DisplayService } from './display.service';
 import { Injectable } from "@angular/core";
@@ -38,7 +39,8 @@ export class ManagmentService {
                 temp.shop.buildingNumber,
                 temp.shop.photo,
                 [],
-                this.ownerName);
+                this.ownerName,
+                temp.shop.location);
                 
             if(this.manageShop.beers!=null) {
                 temp.shop.beers.forEach(e=>this.manageBeers.push(e));
@@ -52,22 +54,27 @@ export class ManagmentService {
             this.city = 'Lodz';
             this.editMode = false;
             this.manageBeers = [];
-            this.manageShop = new Shop('','','','',null,'',this.manageBeers,this.ownerName);
+            this.manageShop = new Shop('','','','',null,'',this.manageBeers,this.ownerName,null);
             this.shopName = '';
         }
+    }
+
+    getShopLocation(): Location {
+        return this.manageShop.location;
     }
 
     setPhotoFile(file: File): Promise<string> {
         return this.uploadFileService.upload(file, this.shopName);
     }
 
-    setShopValues(name: string, phone: string, city: string, postal: string, street: string, building: number, photo: string) {
+    setShopValues(name: string, phone: string, city: string, postal: string, street: string, building: number, photo: string, location: Location) {
         this.manageShop.name = name;
         this.manageShop.phoneNumber = phone;
         this.manageShop.postalAddress = postal;
         this.manageShop.street = street;
         this.manageShop.buildingNumber = building;
         this.manageShop.photo = photo;
+        this.manageShop.location = location;
         
         this.manageShop.beers = [];
 
