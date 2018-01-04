@@ -1,3 +1,4 @@
+import { SetLocationPageModule } from './../pages/set-location/set-location.module';
 import { SignupPageModule } from './../pages/signup/signup.module';
 import { ShopInfoPageModule } from './../pages/shop-info/shop-info.module';
 import { DisplayService } from './../services/display.service';
@@ -36,6 +37,7 @@ import { LoadingService } from '../services/loading.service';
     ManageBeerPageModule,
     SigninPageModule,
     SignupPageModule,
+    SetLocationPageModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [
