@@ -16,7 +16,7 @@ export class ManagmentPage {
   segment: string = 'Shop';
   editMode: boolean = false;
   showSpinner: boolean = false;
-  private submitedPage:boolean[] = [false,false];
+  private submitedPage: boolean[] = [false,false,false];
   
   @ViewChild('f') form: NgForm;
   
@@ -56,21 +56,47 @@ export class ManagmentPage {
         this.segment = 'Beers';
         return;
       }
+      if(!this.submitedPage[2]) {
+        this.segment = 'Location';
+        return;
+      }
     } else if(this.segment == 'Beers') {
       this.submitedPage[1] = true;
       if(!this.submitedPage[0]) {
         this.segment = 'Shop';
         return;
+      } 
+      if(!this.submitedPage[2]) {
+        this.segment = 'Location';
+        return;
+      }
+    } else if(this.segment == 'Location') {
+      this.submitedPage[2] = true;
+      if(!this.submitedPage[0]) {
+        this.segment = 'Shop';
+        return;
+      }
+      if(!this.submitedPage[1]) {
+        this.segment = 'Beers';
+        return;
       }
     }
 
-    if(!this.submitedPage[0] || !this.submitedPage[1]) {
+    if(!this.submitedPage[0] || !this.submitedPage[1] || !this.submitedPage[2]) {
       return;
     }
 
     this.managmentService.setShopValues(this.name, this.phone, this.city, this.postal, this.street, this.building, this.photo);
     let toast = this.toastController.create({message:'Uploaded!', duration:1200});
     toast.present();
+  }
+
+  onLocate(): void {
+
+  }
+
+  onOpenMap(): void {
+    
   }
 
   async changePhotoFile(event: any): Promise<void> {

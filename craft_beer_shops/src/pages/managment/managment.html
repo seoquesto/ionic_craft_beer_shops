@@ -89,6 +89,28 @@
                 </ion-list>
             </div>
 
+            <div *ngSwitchCase="'Location'">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col>
+                            <button ion-button block outline type="button" icon-left (click)="onLocate()">
+                                <ion-icon name="locate">Locate me</ion-icon>
+                            </button>
+                        </ion-col>
+                        <ion-col>
+                            <button ion-button block outline type="button" icon-left (click)="onOpenMap()">
+                                <ion-icon name="map">Select on Map</ion-icon>
+                            </button>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col>
+                            <p>Selected Place ...</p>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+
             <ion-toolbar position="bottom">
                 <button [disabled]="!f.valid || showSpinner" ion-button color="secondary" position="bottom" full (click)="onSubmit()">Save data</button>
             </ion-toolbar>
