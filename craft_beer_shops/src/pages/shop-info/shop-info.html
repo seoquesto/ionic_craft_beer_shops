@@ -26,7 +26,7 @@
         <ion-note item-end>{{shop.postalAddress}}</ion-note>
       </ion-item>
       <ion-item>Phone: 
-        <ion-note item-end>{{shop.phoneNumber}}</ion-note>
+        <ion-note item-end (tap)="phoneNumberClick()">{{shop.phoneNumber}}</ion-note>
       </ion-item>
   </ion-list>
   <ion-card>
