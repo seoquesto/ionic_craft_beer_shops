@@ -29,6 +29,7 @@
         <ion-note item-end>{{shop.phoneNumber}}</ion-note>
       </ion-item>
   </ion-list>
+  <ion-card>
     <ion-row>
       <ion-col>
           <agm-map *ngIf="shop.location" [latitude]="shop.location.lat" [longitude]="shop.location.lng" [zoom]="16">
@@ -37,5 +38,6 @@
             </agm-map>
       </ion-col>
   </ion-row>
+</ion-card>
  <button ion-button color="danger" full (click)="onClose()">Close</button>
 </ion-content>

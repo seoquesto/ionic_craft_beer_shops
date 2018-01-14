@@ -18,7 +18,7 @@ export class SigninPage {
   onSubmit(form: NgForm): void {
     this.loadingService.createLoadingTile('Signing you up..');
     this.authService.signin(form.form.get('email').value,
-                            form.form.get('email').value)
+                            form.form.get('password').value)
                     .then((data)=> {
                       this.loadingService.hideLoadingTile();
                     })
