@@ -15,7 +15,7 @@
                 <ion-icon name="beer"></ion-icon>
                 Home
             </button>
-            <button *ngIf="isAuth" ion-item icon-left (click)="openPage(managePage)">
+            <button *ngIf="isAuth && isManager" ion-item icon-left (click)="openPage(managePage)">
                 <ion-icon name="globe"></ion-icon>
                 Manage
             </button>
@@ -25,11 +25,11 @@
             </button>
             <button *ngIf="!isAuth" ion-item icon-left (click)="openPage(signinPage)">
                 <ion-icon name="log-in"></ion-icon>
-                Signin
+                Signin as a Manager
             </button>
             <button *ngIf="!isAuth" ion-item icon-left (click)="openPage(signupPage)">
                 <ion-icon name="person"></ion-icon>
-                Signup
+                Signup as a Manager
             </button>
             <button *ngIf="isAuth" ion-item icon-left (click)="logout()">
                 <ion-icon name="log-out"></ion-icon>

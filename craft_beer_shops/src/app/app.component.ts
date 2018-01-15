@@ -24,6 +24,7 @@ export class MyApp {
   signupPage: Page = SignupPage;
   startPage: Page = StartPage;
   isAuth:boolean = true;
+  isManager:boolean = false;
   @ViewChild('content') content: NavController;
 
   constructor(private platform: Platform,
@@ -38,6 +39,11 @@ export class MyApp {
         this.isAuth = this.authService.IS_AUTH = true;
         this.authService.USER_ = new User(user.email, user.photoURL);
         this.rootPage = CitiesPage;
+        if(user.providerData[0].providerId=='password'){
+          this.isManager = true;
+        }else{
+          this.isManager = false;
+        }
       } else {
         this.isAuth = this.authService.IS_AUTH = false;
         this.authService.USER_ = null;
