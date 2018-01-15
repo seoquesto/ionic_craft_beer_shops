@@ -1,31 +1,34 @@
 import { User } from './../models/user.model';
-import * as firebase from 'firebase';
-import { auth } from 'firebase';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class AuthService {
     USER_:User = null;
     IS_AUTH: boolean = false;
+
+    constructor( private fire: AngularFireAuth) { }
 
     isAuthenticated(): boolean {
         return true;
     }
 
     signup(email: string, password: string): Promise<any> {
-        return firebase.auth().createUserWithEmailAndPassword(email, password);
+        return this.fire.auth.createUserWithEmailAndPassword(email, password);
     }
 
     updateProfile(displayName: string, photoUrl: string): Promise<any> {
-        return firebase.auth().currentUser.updateProfile({
+        return this.fire.auth.currentUser.updateProfile({
             displayName: displayName,
             photoURL: photoUrl
         });
     }
 
     signin(email: string, password: string): Promise<any> {
-        return firebase.auth().signInWithEmailAndPassword(email, password);
+        return this.fire.auth.signInWithEmailAndPassword(email, password);
     }
 
     logout(): Promise<any> {
-        return auth().signOut();
+        return this.fire.auth.signOut();
     }
 }

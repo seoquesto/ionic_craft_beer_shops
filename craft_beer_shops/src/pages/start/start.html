@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name='menu'></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Welcome</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <button ion-button (click)="loginWithFacebook()">Login with Facebook</button>
+  <button ion-button  (click)="loginWithGoogle()">Login with Google</button>
+</ion-content>

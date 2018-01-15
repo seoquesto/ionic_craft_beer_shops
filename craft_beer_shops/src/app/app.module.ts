@@ -21,7 +21,9 @@ import { ManagmentService } from '../services/managment.service';
 import { UploadService } from '../services/upload-file.service';
 import { SigninPageModule } from '../pages/signin/signin.module';
 import { LoadingService } from '../services/loading.service';
-
+import { StartPageModule } from '../pages/start/start.module';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,16 @@ import { LoadingService } from '../services/loading.service';
     SigninPageModule,
     SignupPageModule,
     SetLocationPageModule,
+    StartPageModule,
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyCaiVcBBX_s3_eymLcuwpIc1dDuc03JFxY",
+      authDomain: "craft-beer-9033d.firebaseapp.com",
+      databaseURL: "https://craft-beer-9033d.firebaseio.com",
+      projectId: "craft-beer-9033d",
+      storageBucket: "craft-beer-9033d.appspot.com",
+      messagingSenderId: "299241268802"
+    }),
+    AngularFireAuthModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [

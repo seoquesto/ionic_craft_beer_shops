@@ -19,6 +19,10 @@
                 <ion-icon name="globe"></ion-icon>
                 Manage
             </button>
+            <button *ngIf="!isAuth" ion-item icon-left (click)="openPage(startPage)">
+                <ion-icon name="home"></ion-icon>
+                Start
+            </button>
             <button *ngIf="!isAuth" ion-item icon-left (click)="openPage(signinPage)">
                 <ion-icon name="log-in"></ion-icon>
                 Signin
