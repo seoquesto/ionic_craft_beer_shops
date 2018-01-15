@@ -32,7 +32,7 @@ export class ShopsListPage implements OnInit {
 
   onShopClick(shop: Shop): void {
     this.navController.push(BeersListPage, {
-      shopName: shop.name, beers: shop.beers});
+      shop: shop, beers: shop.beers});
   }
 
   refreshShops(ev: any): void {
